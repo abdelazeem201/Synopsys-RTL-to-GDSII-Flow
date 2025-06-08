@@ -1,5 +1,6 @@
 // Description: General Purpose Registers
 //
+// Author: Ahmed Abdelazeem
 module GeneralPurposeRegisters(A,B,C,RdAdrA,RdAdrB,RdAdrC,
                                WrtAdrX,WrtEnbX,WrtAdrY,WrtEnbY,X,Y,clock,reset);
 
