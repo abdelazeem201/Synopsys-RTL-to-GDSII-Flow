@@ -1,4 +1,5 @@
 // Description: Carry Look-Ahead Adders
+// Author: Ahmed Abdelazeem
 // Details:
 //
 // Four Bit Slice of Carry Look-Ahead Adder
