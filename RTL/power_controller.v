@@ -1,5 +1,5 @@
 // Description : Power Controller 
-// Author       : Godwin Maben
+// Author       : Ahmed Abdelazeem
 // Details      : Power Controller is the block, which reads the instruction 
 //                and generate appropriate power down signals to various blocks  
 //		  This block needs to be Always on, it generates 
@@ -8,7 +8,7 @@
 //		  restore - restore for RFF
 //		  iso  - isolation_enable signals for Isolation cell
 //		  reset - Reset signal to reset the block after wake-up
-// Created on   : 12/11/2007
+// Created on   : 12/11/2024
 // ---------------------------------------------------------------
 
 
