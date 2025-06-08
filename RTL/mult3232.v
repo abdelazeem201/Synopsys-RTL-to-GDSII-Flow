@@ -13,6 +13,7 @@
 //   -----------------------------------------------
 //   S2n-1 S2n-2  ...                       S2 S1 S0
 //
+// Author: Ahmed Abdelazeem
 module Mult_32x32(Ovfl,Product,X,Y,Z,clock,iso,reset);
   `define nBits   32
 
