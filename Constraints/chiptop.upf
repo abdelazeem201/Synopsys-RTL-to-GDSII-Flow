@@ -1,0 +1,101 @@
+###########################################
+## CREATE POWER DOMAINS
+###########################################
+
+# Define the top-level power domain
+create_power_domain TOP
+
+# Define the GPRS domain and associate its elements
+create_power_domain GPRS -elements GPRs
+
+
+###########################################
+## CREATE AND CONNECT SUPPLY PORTS/NETS
+###########################################
+
+# -------- TOP DOMAIN SUPPLY NETS --------
+
+# VDD: Primary power for TOP
+create_supply_port VDD
+create_supply_net  VDD -domain TOP
+connect_supply_net VDD -ports VDD
+
+# VSS: Ground for TOP
+create_supply_port VSS
+create_supply_net  VSS -domain TOP
+connect_supply_net VSS -ports VSS
+
+# VDDGS: Power for low-voltage domains (e.g., GPRS)
+create_supply_port VDDGS
+create_supply_net  VDDGS -domain TOP
+connect_supply_net VDDGS -ports VDDGS
+
+
+# -------- REUSE FOR GPRS DOMAIN --------
+
+# Reuse VDD, VSS, and VDDGS nets in GPRS domain
+create_supply_net VDD   -domain GPRS -reuse
+create_supply_net VSS   -domain GPRS -reuse
+create_supply_net VDDGS -domain GPRS -reuse
+
+
+###########################################
+## ASSIGN PRIMARY POWER/GROUND NETS TO DOMAINS
+###########################################
+
+# Define primary power and ground for TOP
+set_domain_supply_net TOP \
+    -primary_power_net  VDD \
+    -primary_ground_net VSS
+
+# Define primary power and ground for GPRS
+set_domain_supply_net GPRS \
+    -primary_power_net  VDDGS \
+    -primary_ground_net VSS
+
+
+###########################################
+## GPRS ISOLATION (OPTIONAL & COMMENTED)
+###########################################
+
+# Example isolation logic for GPRS outputs
+# Uncomment and modify as needed
+
+# set_isolation gprs_iso_out \
+#     -domain GPRS \
+#     -isolation_power_net VDD \
+#     -isolation_ground_net VSS \
+#     -clamp_value 1 \
+#     -applies_to outputs
+
+# set_isolation_control gprs_iso_out \
+#     -domain GPRS \
+#     -isolation_signal PwrCtrl/gprs_iso \
+#     -isolation_sense low \
+#     -location parent
+
+
+###########################################
+## ADD PORT STATE INFORMATION
+###########################################
+
+# Declare voltage levels associated with ports
+# These are useful for voltage-aware DRC and checks
+
+add_port_state VDD    -state {HV 0.95}   ;# High voltage domain (TOP)
+add_port_state VDDGS  -state {LV 0.7}    ;# Low voltage domain (GPRS)
+add_port_state VSS    -state {GND 0.0}   ;# Ground
+
+
+###########################################
+## PLACEHOLDERS FOR FUTURE DOMAINS
+###########################################
+
+# VDDX and VDDY setup not yet defined
+# create_supply_port VDDX
+# create_supply_net  VDDX -domain <DOMAIN_NAME>
+# connect_supply_net VDDX -ports VDDX
+
+# create_supply_port VDDY
+# create_supply_net  VDDY -domain <DOMAIN_NAME>
+# connect_supply_net VDDY -ports VDDY
