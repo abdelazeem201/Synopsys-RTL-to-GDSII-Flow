@@ -46,7 +46,7 @@ The following is the directory structure of the counter design mini-project
 | directory     | description   |
 | ------------- | ------------- |
 |RTL           | Contains common RTL design files  |
-|Simulation  | Run Incisive simulation here  |
+|Simulation  | Run VCS simulation here  |
 |Synthesis|Run Design Compiler synthesis here|
 |Equivalence Checking|Run Formality equivalence checking here|
 |GLS|Run VCS gate-level simulation here|
@@ -66,12 +66,12 @@ tool-generated files do not get mixed up.
 
 2. During your run, save your modified design files inside the same directory where you run those tools.
 
-# Counter-Design
-- The binary counter is an example of a simple synchronous digital circuit. It has no data inputs and no combinational output logic circuit.
+# DHM-Design
+- Processor specially designed for LPD technique implementation
 
-- At each clock pulse, the counter takes up a new state and thus goes through a specific count sequence.
+- For simplicity only one block of ChipTop GPRS is considered
 
-- We shall now write a design spec for 8bit up-counter with two outputs which go through the following sequence:
+- We shall now write a design spec for dhm design:
 ![Figure 1: 8bit-counter-block-diagram](https://user-images.githubusercontent.com/58098260/211213632-3d9db520-15c2-420e-b431-50486b6da349.png)
 - The counter should have the following inputs:
   - rst, which is synchronous, active low
