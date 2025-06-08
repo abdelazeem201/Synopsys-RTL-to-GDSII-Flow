@@ -1,5 +1,6 @@
 //   Generate Partial Products for 32 x 32 Multiplier using  Radix 4 Booth
 //   Recoding (8 Bit Signed Operands) & Partial Product Generation
+//   Author: Ahmed Abdelazeem
 //
 module GenPP_32Bits(PP15,PP14,PP13,PP12,PP11,PP10,PP9,PP8,
                     PP7,PP6,PP5,PP4,PP3,PP2,PP1,PP0,iso_X,iso_Y,iso_in);
