@@ -29,10 +29,49 @@ group_path -name OUTPUTS -to $OUTPUTPORTS           -weight 1
 
 ## DRC
 set_max_transition   $MAX_TRANSITION   [current_design]
-set_max_capacitance  100.0             [current_design]
-set_max_fanout       200               [current_design]
+set_max_capacitance  10.0             [current_design]
+set_max_fanout       20               [current_design]
 
 ## IO modeling
 
 set_driving_cell -lib_cell NBUFFX4_RVT $INPUTPORTS
 set_load 20 $OUTPUTPORTS
+
+
+
+## EXCEPTIONS
+set_multicycle_path -setup -through [get_pin PwrCtrl/gprs_iso] 2
+set_multicycle_path -setup -through [get_pin PwrCtrl/mult_iso] 2
+set_multicycle_path -setup -through [get_pin PwrCtrl/memx_iso] 2
+set_multicycle_path -setup -through [get_pin PwrCtrl/memy_iso] 2
+
+set_multicycle_path -setup -through [get_pin PwrCtrl/gprs_save] 2
+set_multicycle_path -setup -through [get_pin PwrCtrl/gprs_restore] 2
+
+set_multicycle_path -setup -through [get_pin PwrCtrl/mult_sd] 2
+set_multicycle_path -setup -through [get_pin PwrCtrl/gprs_sd] 2
+set_multicycle_path -setup -through [get_pin PwrCtrl/memx_sd] 2
+set_multicycle_path -setup -through [get_pin PwrCtrl/memy_sd] 2
+
+set_multicycle_path -hold -through [get_pin PwrCtrl/gprs_iso] 1
+set_multicycle_path -hold -through [get_pin PwrCtrl/mult_iso] 1
+set_multicycle_path -hold -through [get_pin PwrCtrl/memx_iso] 1
+set_multicycle_path -hold -through [get_pin PwrCtrl/memy_iso] 1
+
+set_multicycle_path -hold -through [get_pin PwrCtrl/gprs_save] 1
+set_multicycle_path -hold -through [get_pin PwrCtrl/gprs_restore] 1
+
+set_multicycle_path -hold -through [get_pin PwrCtrl/mult_sd] 1
+set_multicycle_path -hold -through [get_pin PwrCtrl/gprs_sd] 1
+set_multicycle_path -hold -through [get_pin PwrCtrl/memx_sd] 1
+set_multicycle_path -hold -through [get_pin PwrCtrl/memy_sd] 1
+
+set_operating_conditions -library saed14rvt_ss0p72v125c ss0p72v125c
+
+set_voltage 0.72 -obj {VDDL}
+set_voltage 0.72 -obj {VDD }
+set_voltage 0.000 -obj {VSS}
+set_voltage 0.72 -obj {TOP.primary.power}
+set_voltage 0.000 -obj {TOP.primary.ground}
+set_voltage 0.000 -obj {GPRS.primary.ground}
+set_voltage 0.72 -obj {GPRS.primary.power}
